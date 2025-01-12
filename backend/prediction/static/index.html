@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Fraud Detection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #3498db;
+            font-weight: 600;
+        }
+
+        form {
+            display: grid;
+            grid-gap: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="datetime-local"],
+        input[type="date"],
+        select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            width: calc(100% - 24px);
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="datetime-local"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+        }
+
+
+        button {
+            padding: 14px 20px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f8f5;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 1px solid #e0f2f1;
+        }
+
+        .result h2 {
+            color: #2ecc71;
+            margin-bottom: 15px;
+        }
+
+        .result p {
+            margin: 10px 0;
+            font-size: 1.05em;
+        }
+
+        @media (min-width: 768px) {
+          .container {
+            padding: 50px;
+           }
+            form {
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 20px;
+            }
+             form > *:last-child {
+              grid-column: span 2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Transaction Fraud Detection</h1>
+        <form id="transactionForm">
+
+        <label for="transfer_time">Transfer Time:</label>
+        <input type="datetime-local" id="transfer_time" name="transfer_time" required>
+
+
+        <label for="amount">Transaction Amount:</label>
+        <input type="number" id="amount" name="amount" required step="0.01">
+
+        <label for="withdrawable_cash">Withdrawable Cash:</label>
+        <input type="number" id="withdrawable_cash" name="withdrawable_cash" required step="0.01">
+
+          <label for="hesap_acilis_tarihi">Account Opening Date:</label>
+          <input type="date" id="hesap_acilis_tarihi" name="hesap_acilis_tarihi" required>
+
+
+            <label for="uyruk">Nationality:</label>
+            <input type="text" id="uyruk" name="uyruk" required>
+
+            <label for="hesap_acilis_tipi">Account Opening Type:</label>
+            <input type="text" id="hesap_acilis_tipi" name="hesap_acilis_tipi" required>
+
+            <label for="yas">Age:</label>
+            <input type="number" id="yas" name="yas" required>
+
+            <label for="meslek">Occupation:</label>
+            <input type="text" id="meslek" name="meslek" required>
+
+            <label for="bist_tl_cinsinden_hacim">BIST Volume in TL:</label>
+            <input type="number" id="bist_tl_cinsinden_hacim" name="bist_tl_cinsinden_hacim" required step="0.01">
+
+            <label for="us_borsasi_usd_cinsinden_hacim">US Market Volume in USD:</label>
+            <input type="number" id="us_borsasi_usd_cinsinden_hacim" name="us_borsasi_usd_cinsinden_hacim" required step="0.01">
+
+            <label for="usd_toplam_islem_hacmi">Total USD Transaction Volume:</label>
+            <input type="number" id="usd_toplam_islem_hacmi" name="usd_toplam_islem_hacmi" required step="0.01">
+
+            <label for="ikamet_ili">City Code:</label>
+            <input type="number" id="ikamet_ili" name="ikamet_ili" required>
+
+            <label for="farkli_kisi_deposit_amount_try">Deposit Amount from Different People in TRY:</label>
+            <input type="number" id="farkli_kisi_deposit_amount_try" name="farkli_kisi_deposit_amount_try" required step="0.01">
+
+            <label for="farkli_kisi_sayisi">Number of Different People:</label>
+            <input type="number" id="farkli_kisi_sayisi" name="farkli_kisi_sayisi" required step="0.01">
+
+            <button type="submit">Check Fraud</button>
+        </form>
+
+        <div class="result" id="result"></div>
+    </div>
+    <script>
+        document.getElementById('transactionForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+
+          
+          const formattedData = {
+              transfer_time: data.transfer_time,
+              amount: parseFloat(data.amount),
+              withdrawable_cash: parseFloat(data.withdrawable_cash),
+              hesap_acilis_tarihi: data.hesap_acilis_tarihi,
+              uyruk: data.uyruk,
+              hesap_acilis_tipi: data.hesap_acilis_tipi,
+              yas: parseInt(data.yas),
+              meslek: data.meslek,
+              bist_tl_cinsinden_hacim: parseFloat(data.bist_tl_cinsinden_hacim),
+              us_borsasi_usd_cinsinden_hacim: parseFloat(data.us_borsasi_usd_cinsinden_hacim),
+              usd_toplam_islem_hacmi: parseFloat(data.usd_toplam_islem_hacmi),
+              ikamet_ili: parseInt(data.ikamet_ili),
+               farkli_kisi_deposit_amount_try: parseFloat(data.farkli_kisi_deposit_amount_try),
+              farkli_kisi_sayisi: parseFloat(data.farkli_kisi_sayisi)
+            };
+            try {
+                const response = await fetch('http://127.0.0.1:8000//predict/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formattedData),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+                document.getElementById('result').innerHTML = `
+                    <h2>Prediction Result:</h2>
+                    <p>Is Fraud: ${result.is_fraud}</p>
+                    <p>Probability: ${result.probability}</p>
+                `;
+            } catch (error) {
+                document.getElementById('result').innerHTML = `<p>Error: ${error.message}</p>`;
+            }
+        });
+    </script>
+</body>
+
+</html>
