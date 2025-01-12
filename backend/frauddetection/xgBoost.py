@@ -68,4 +68,3 @@ def train_xgboost(train_data, test_data):
     print(f"ROC-AUC Score: {roc_auc_score(y_test, y_proba)}")
 
     return model
-
